@@ -17,7 +17,6 @@ export interface IPythonSettings {
     unitTest: IUnitTestSettings;
     autoComplete: IAutoCompeteSettings;
     terminal: ITerminalSettings;
-    jupyter: JupyterSettings;
     sortImports: ISortImportSettings;
     workspaceSymbols: IWorkspaceSymbolSettings;
 }
@@ -277,12 +276,6 @@ export class PythonSettings extends EventEmitter implements IPythonSettings {
             launchArgs: []
         };
 
-        this.jupyter = pythonSettings.get<JupyterSettings>('jupyter');
-        // Support for travis
-        this.jupyter = this.jupyter ? this.jupyter : {
-            appendResults: true, defaultKernel: '', startupCode: []
-        };
-
         this.emit('change');
     }
 
@@ -310,7 +303,6 @@ export class PythonSettings extends EventEmitter implements IPythonSettings {
     public autoComplete: IAutoCompeteSettings;
     public unitTest: IUnitTestSettings;
     public terminal: ITerminalSettings;
-    public jupyter: JupyterSettings;
     public sortImports: ISortImportSettings;
     public workspaceSymbols: IWorkspaceSymbolSettings;
 }
