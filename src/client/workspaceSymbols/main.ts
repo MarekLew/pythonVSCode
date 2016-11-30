@@ -37,7 +37,7 @@ export class WorkspaceSymbols implements vscode.Disposable {
             this.rebuildTags();
         }
     }
-    private timeout: number;
+    private timeout: NodeJS.Timer;
     rebuildTags() {
         if (this.timeout) {
             clearTimeout(this.timeout);

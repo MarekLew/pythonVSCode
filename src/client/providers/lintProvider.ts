@@ -122,13 +122,13 @@ export class LintProvider extends vscode.Disposable {
         this.initializeGlobs();
     }
 
-    private lastTimeout: number;
+    private lastTimeout: NodeJS.Timer;
     private lintDocument(document: vscode.TextDocument, delay: number): void {
         // Since this is a hack, lets wait for 2 seconds before linting
         // Give user to continue typing before we waste CPU time
         if (this.lastTimeout) {
             clearTimeout(this.lastTimeout);
-            this.lastTimeout = 0;
+            this.lastTimeout = null;
         }
 
         this.lastTimeout = setTimeout(() => {
