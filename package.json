@@ -54,9 +54,6 @@
 		"onCommand:python.runFailedTests",
 		"onCommand:python.execSelectionInTerminal",
 		"onCommand:python.execSelectionInDjangoShell",
-		"onCommand:jupyter.runSelectionLine",
-		"onCommand:jupyter.execCurrentCell",
-		"onCommand:jupyter.execCurrentCellAndAdvance",
 		"onCommand:python.displayHelp",
 		"onCommand:python.buildWorkspaceSymbols",
 		"onCommand:python.updateSparkLibrary"
@@ -85,11 +82,6 @@
 		"snippets": [{
 			"language": "python",
 			"path": "./snippets/python.json"
-		}],
-		"keybindings": [{
-			"command": "jupyter.runSelectionLine",
-			"key": "ctrl+alt+enter",
-			"when": "editorFocus && !replaceActive && !searchViewletVisible && !findWidgetVisible"
 		}],
 		"commands": [{
 				"command": "python.sortImports",
@@ -170,31 +162,6 @@
 				"command": "python.execSelectionInDjangoShell",
 				"title": "Run Selection in Django Shell",
 				"category": "Python"
-			},
-			{
-				"command": "jupyter.runSelectionLine",
-				"title": "Run Selection/Line",
-				"category": "Jupyter"
-			},
-			{
-				"command": "jupyter:execCurrentCell",
-				"title": "Run Cell",
-				"category": "Jupyter"
-			},
-			{
-				"command": "jupyter:execCurrentCellAndAdvance",
-				"title": "Run Cell and Advance",
-				"category": "Jupyter"
-			},
-			{
-				"command": "jupyter:gotToPreviousCell",
-				"title": "Go to Previous Cell",
-				"category": "Jupyter"
-			},
-			{
-				"command": "jupyter:gotToNextCell",
-				"title": "Go to Next Cell",
-				"category": "Jupyter"
 			},
 			{
 				"command": "python.displayHelp",
@@ -1191,39 +1158,17 @@
 					"type": "array",
 					"default": [],
 					"description": "Python launch arguments to use when executing a file in the terminal."
-				},
-				"python.jupyter.appendResults": {
-					"type": "boolean",
-					"default": true,
-					"description": "Whether to appen the results to results window, else clear and display."
-				},
-				"python.jupyter.defaultKernel": {
-					"type": "string",
-					"default": "",
-					"description": "Default kernel to be used. By default the first available kernel is used."
-				},
-				"python.jupyter.startupCode": {
-					"type": "array",
-					"items": {
-						"type": "string"
-					},
-					"default": [
-						"%matplotlib inline"
-					],
-					"description": "Code executed when the kernel starts. Such as the default of '%matplotlib inline'. Individual lines can be placed in separate items of the array."
 				}
 			}
 		}
 	},
 	"scripts": {
-		"vscode:prepublish": "tsc -p ./ && webpack",
-		"compile": "webpack && tsc -watch -p ./",
+		"vscode:prepublish": "tsc -p ./",
+		"compile": "tsc -watch -p ./",
 		"postinstall": "node ./node_modules/vscode/bin/install",
 		"test": "node ./node_modules/vscode/bin/test"
 	},
 	"dependencies": {
-		"anser": "^1.1.0",
-		"copy-paste": "^1.3.0",
 		"diff-match-patch": "^1.0.0",
 		"fs-extra": "^0.30.0",
 		"fuzzy": "^0.1.3",
@@ -1232,11 +1177,7 @@
 		"named-js-regexp": "^1.3.1",
 		"node-static": "^0.7.9",
 		"prepend-file": "^1.3.0",
-		"rx": "^4.1.0",
-		"socket.io": "^1.4.8",
 		"tmp": "0.0.29",
-		"transformime": "^3.1.2",
-		"transformime-marked": "0.0.1",
 		"tree-kill": "^1.1.0",
 		"uint64be": "^1.0.1",
 		"vscode-debugadapter": "^1.0.1",
@@ -1247,23 +1188,13 @@
 		"xml2js": "^0.4.17"
 	},
 	"devDependencies": {
-		"@types/jquery": "^1.10.31",
 		"@types/mocha": "^2.2.32",
 		"@types/node": "^6.0.40",
-		"@types/rx": "^2.5.33",
-		"@types/socket.io": "^1.4.27",
-		"@types/socket.io-client": "^1.4.27",
 		"@types/uuid": "^3.3.27",
-		"babel-core": "^6.14.0",
-		"babel-loader": "^6.2.5",
-		"babel-preset-es2015": "^6.14.0",
-		"ignore-loader": "^0.1.1",
 		"mocha": "^2.3.3",
 		"retyped-diff-match-patch-tsd-ambient": "^1.0.0-0",
-		"ts-loader": "^0.8.2",
 		"tslint": "^3.15.1",
 		"typescript": "^2.0.3",
-		"vscode": "^1.0.0",
-		"webpack": "^1.13.2"
+		"vscode": "^1.0.0"
 	}
 }

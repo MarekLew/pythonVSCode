@@ -1,6 +1,6 @@
 import { Range, window, TextDocument, Position } from 'vscode';
 
-export class Provider {
+export class JupyterProvider {
     /**
      * Returns a Regular Expression used to determine whether a line is a Cell delimiter or not
      *
@@ -23,7 +23,7 @@ export class Provider {
      * @memberOf LanguageProvider
      */
     getSelectedCode(selectedCode: string, currentCell?: Range): Promise<string> {
-        if (!Provider.isCodeBlock(selectedCode)) {
+        if (!JupyterProvider.isCodeBlock(selectedCode)) {
             return Promise.resolve(selectedCode);
         }
 

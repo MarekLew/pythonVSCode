@@ -1,5 +1,3 @@
-/// <reference path="../../../../typings/globals/xml2js/index.d.ts" />
-
 'use strict';
 import { createTemporaryFile } from '../../common/helpers';
 import { TestsToRun, Tests } from '../common/contracts';

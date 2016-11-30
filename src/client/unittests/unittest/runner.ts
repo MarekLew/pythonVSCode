@@ -1,5 +1,3 @@
-/// <reference path="../../../../typings/globals/xml2js/index.d.ts" />
-
 'use strict';
 import * as path from 'path';
 import { TestsToRun, Tests, TestStatus } from '../common/contracts';
