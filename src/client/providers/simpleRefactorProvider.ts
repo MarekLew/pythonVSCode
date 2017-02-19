@@ -33,13 +33,16 @@ export function extractVariable(extensionDir: string, textEditor: vscode.TextEdi
     pythonSettings: IPythonSettings = PythonSettings.getInstance()): Promise<any> {
 
     return validateDocumentForRefactor(textEditor).then(() => {
-        let newName = 'newvariable' + new Date().getMilliseconds().toString();
         let proxy = new RefactorProxy(extensionDir, pythonSettings, workspaceRoot);
-        let rename = proxy.extractVariable<RenameResponse>(textEditor.document, newName, textEditor.document.uri.fsPath, range, textEditor.options).then(response => {
-            return response.results[0].diff;
-        });
+        return vscode.window.showInputBox({ prompt: 'New variable name:' }).then(
+            newName => {
+                let rename = proxy.extractVariable<RenameResponse>(textEditor.document, newName, textEditor.document.uri.fsPath, range, textEditor.options).then(response => {
+                    return response.results[0].diff;
+                });
 
-        return extractName(extensionDir, textEditor, range, newName, rename, outputChannel);
+                return extractName(extensionDir, textEditor, range, newName, rename, outputChannel);
+            }
+        );
     });
 }
 
@@ -49,13 +52,16 @@ export function extractMethod(extensionDir: string, textEditor: vscode.TextEdito
     pythonSettings: IPythonSettings = PythonSettings.getInstance()): Promise<any> {
 
     return validateDocumentForRefactor(textEditor).then(() => {
-        let newName = 'newmethod' + new Date().getMilliseconds().toString();
         let proxy = new RefactorProxy(extensionDir, pythonSettings, workspaceRoot);
-        let rename = proxy.extractMethod<RenameResponse>(textEditor.document, newName, textEditor.document.uri.fsPath, range, textEditor.options).then(response => {
-            return response.results[0].diff;
-        });
+        return vscode.window.showInputBox({ prompt: 'New method name:' }).then(
+            newName => {
+                let rename = proxy.extractMethod<RenameResponse>(textEditor.document, newName, textEditor.document.uri.fsPath, range, textEditor.options).then(response => {
+                    return response.results[0].diff;
+                });
 
-        return extractName(extensionDir, textEditor, range, newName, rename, outputChannel);
+                return extractName(extensionDir, textEditor, range, newName, rename, outputChannel);
+            }
+        );
     });
 }
 
@@ -117,7 +123,7 @@ function extractName(extensionDir: string, textEditor: vscode.TextEditor, range:
         if (newWordPosition) {
             return textEditor.document.save().then(() => {
                 // Now that we have selected the new variable, lets invoke the rename command
-                return vscode.commands.executeCommand('editor.action.rename');
+                return newWordPosition;
             });
         }
     }).catch(error => {
